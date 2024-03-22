@@ -9,9 +9,9 @@ import { useControls } from 'leva'
 const GameEngineContext = createContext()
 
 const TIME_PHASE_TILE_DRAW = 5
-const TIME_PHASE_TILE_PLACE = 20
-const TIME_PHASE_MEEPLE_PLACE = 20
-const TIME_PHASE_CALCULATE_POINTS = 10
+const TIME_PHASE_TILE_PLACE = 5
+const TIME_PHASE_MEEPLE_PLACE = 5
+const TIME_PHASE_CALCULATE_POINTS = 5
 
 export const GameEngineProvider = ({ children }) => {
 
@@ -98,7 +98,8 @@ export const GameEngineProvider = ({ children }) => {
         // change playerTurn to the next player or player 0
         // if at last player
         console.log(players)
-        const nextPlayer = getState('timer') + 1
+        let nextPlayer = getState('playerTurn') + 1
+        if (nextPlayer === players.length) {nextPlayer = 0}
         console.log('player turn: ', nextPlayer)
         setPlayerTurn(nextPlayer)
         const nextTurn = getState('turn') + 1
